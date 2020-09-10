@@ -25,7 +25,9 @@ namespace BookstoreApplication.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Authors> Authors { get; set; }
         public virtual DbSet<Books> Books { get; set; }
         public virtual DbSet<Magazines> Magazines { get; set; }
+        public virtual DbSet<Publishers> Publishers { get; set; }
     }
 }

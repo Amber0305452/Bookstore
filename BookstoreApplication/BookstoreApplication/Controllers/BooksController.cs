@@ -10,17 +10,18 @@ using BookstoreApplication.Models;
 
 namespace BookstoreApplication.Controllers
 {
-    public class BookController : Controller
+    public class BooksController : Controller
     {
         private bookstoreEntities db = new bookstoreEntities();
 
-        // GET: Book
+        // GET: Books
         public ActionResult Index()
         {
-            return View(db.Books.ToList());
+            var books = db.Books.Include(b => b.Authors).Include(b => b.Publishers);
+            return View(books.ToList());
         }
 
-        // GET: Book/Details/5
+        // GET: Books/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -35,18 +36,20 @@ namespace BookstoreApplication.Controllers
             return View(books);
         }
 
-        // GET: Book/Create
+        // GET: Books/Create
         public ActionResult Create()
         {
+            ViewBag.Authorid = new SelectList(db.Authors, "Authorid", "FirstName");
+            ViewBag.Publisherid = new SelectList(db.Publishers, "Publisherid", "FullName");
             return View();
         }
 
-        // POST: Book/Create
+        // POST: Books/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Bookid,Title,Author,Languages,Dimensions,Weights,Prints,ISBN,Cover")] Books books)
+        public ActionResult Create([Bind(Include = "Bookid,Title,Authorid,Publisherid,Languages,Dimensions,Weights,Prints,ISBN,Cover")] Books books)
         {
             if (ModelState.IsValid)
             {
@@ -55,10 +58,12 @@ namespace BookstoreApplication.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.Authorid = new SelectList(db.Authors, "Authorid", "FirstName", books.Authorid);
+            ViewBag.Publisherid = new SelectList(db.Publishers, "Publisherid", "FullName", books.Publisherid);
             return View(books);
         }
 
-        // GET: Book/Edit/5
+        // GET: Books/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -70,15 +75,17 @@ namespace BookstoreApplication.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Authorid = new SelectList(db.Authors, "Authorid", "FirstName", books.Authorid);
+            ViewBag.Publisherid = new SelectList(db.Publishers, "Publisherid", "FullName", books.Publisherid);
             return View(books);
         }
 
-        // POST: Book/Edit/5
+        // POST: Books/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Bookid,Title,Author,Languages,Dimensions,Weights,Prints,ISBN,Cover")] Books books)
+        public ActionResult Edit([Bind(Include = "Bookid,Title,Authorid,Publisherid,Languages,Dimensions,Weights,Prints,ISBN,Cover")] Books books)
         {
             if (ModelState.IsValid)
             {
@@ -86,10 +93,12 @@ namespace BookstoreApplication.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.Authorid = new SelectList(db.Authors, "Authorid", "FirstName", books.Authorid);
+            ViewBag.Publisherid = new SelectList(db.Publishers, "Publisherid", "FullName", books.Publisherid);
             return View(books);
         }
 
-        // GET: Book/Delete/5
+        // GET: Books/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -104,7 +113,7 @@ namespace BookstoreApplication.Controllers
             return View(books);
         }
 
-        // POST: Book/Delete/5
+        // POST: Books/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

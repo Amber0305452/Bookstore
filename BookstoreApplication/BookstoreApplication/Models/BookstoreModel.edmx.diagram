@@ -4,9 +4,15 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5d9092c6aa23442f8a96df2fc5ff352b" Name="Diagram1">
-        <EntityTypeShape EntityType="bookstoreModel.Books" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="bookstoreModel.Magazines" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+      <Diagram DiagramId="af2a0800a8d042c4bf5b7e01db2a1536" Name="Diagram1">
+        <EntityTypeShape EntityType="bookstoreModel.Authors" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bookstoreModel.Books" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bookstoreModel.Magazines" Width="1.5" PointX="6" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="bookstoreModel.Publishers" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <AssociationConnector Association="bookstoreModel.FK__Books__Authorid__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="bookstoreModel.FK__Magazines__Autho__6A30C649" ManuallyRouted="false" />
+        <AssociationConnector Association="bookstoreModel.FK__Books__Publisher__6754599E" ManuallyRouted="false" />
+        <AssociationConnector Association="bookstoreModel.FK__Magazines__Publi__6B24EA82" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

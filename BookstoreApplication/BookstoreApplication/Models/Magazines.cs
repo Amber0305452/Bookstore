@@ -16,11 +16,15 @@ namespace BookstoreApplication.Models
     {
         public int Magazineid { get; set; }
         public string Title { get; set; }
-        public string Publisher { get; set; }
+        public Nullable<int> Authorid { get; set; }
+        public Nullable<int> Publisherid { get; set; }
         public Nullable<System.DateTime> Publishdate { get; set; }
         public string Languages { get; set; }
         public string Dimensions { get; set; }
         public string ISSN { get; set; }
         public byte[] Cover { get; set; }
+    
+        public virtual Authors Authors { get; set; }
+        public virtual Publishers Publishers { get; set; }
     }
 }

@@ -20,14 +20,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Author)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Author)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.Languages)
         </dt>
 
@@ -73,6 +65,22 @@
 
         <dd>
             @Html.DisplayFor(model => model.Cover)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Authors.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Authors.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Publishers.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Publishers.FullName)
         </dd>
 
     </dl>

@@ -10,17 +10,18 @@ using BookstoreApplication.Models;
 
 namespace BookstoreApplication.Controllers
 {
-    public class MagazineController : Controller
+    public class MagazinesController : Controller
     {
         private bookstoreEntities db = new bookstoreEntities();
 
-        // GET: Magazine
+        // GET: Magazines
         public ActionResult Index()
         {
-            return View(db.Magazines.ToList());
+            var magazines = db.Magazines.Include(m => m.Authors).Include(m => m.Publishers);
+            return View(magazines.ToList());
         }
 
-        // GET: Magazine/Details/5
+        // GET: Magazines/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -35,18 +36,20 @@ namespace BookstoreApplication.Controllers
             return View(magazines);
         }
 
-        // GET: Magazine/Create
+        // GET: Magazines/Create
         public ActionResult Create()
         {
+            ViewBag.Authorid = new SelectList(db.Authors, "Authorid", "FirstName");
+            ViewBag.Publisherid = new SelectList(db.Publishers, "Publisherid", "FullName");
             return View();
         }
 
-        // POST: Magazine/Create
+        // POST: Magazines/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Magazineid,Title,Author,Publisher,PublishDate,Dimensions,ISSN,Cover")] Magazines magazines)
+        public ActionResult Create([Bind(Include = "Magazineid,Title,Authorid,Publisherid,Publishdate,Languages,Dimensions,ISSN,Cover")] Magazines magazines)
         {
             if (ModelState.IsValid)
             {
@@ -55,10 +58,12 @@ namespace BookstoreApplication.Controllers
                 return RedirectToAction("Index");
             }
 
+            ViewBag.Authorid = new SelectList(db.Authors, "Authorid", "FirstName", magazines.Authorid);
+            ViewBag.Publisherid = new SelectList(db.Publishers, "Publisherid", "FullName", magazines.Publisherid);
             return View(magazines);
         }
 
-        // GET: Magazine/Edit/5
+        // GET: Magazines/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -70,15 +75,17 @@ namespace BookstoreApplication.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Authorid = new SelectList(db.Authors, "Authorid", "FirstName", magazines.Authorid);
+            ViewBag.Publisherid = new SelectList(db.Publishers, "Publisherid", "FullName", magazines.Publisherid);
             return View(magazines);
         }
 
-        // POST: Magazine/Edit/5
+        // POST: Magazines/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Magazineid,Title,Author,Publisher,PublishDate,Dimensions,ISSN,Cover")] Magazines magazines)
+        public ActionResult Edit([Bind(Include = "Magazineid,Title,Authorid,Publisherid,Publishdate,Languages,Dimensions,ISSN,Cover")] Magazines magazines)
         {
             if (ModelState.IsValid)
             {
@@ -86,10 +93,12 @@ namespace BookstoreApplication.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.Authorid = new SelectList(db.Authors, "Authorid", "FirstName", magazines.Authorid);
+            ViewBag.Publisherid = new SelectList(db.Publishers, "Publisherid", "FullName", magazines.Publisherid);
             return View(magazines);
         }
 
-        // GET: Magazine/Delete/5
+        // GET: Magazines/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -104,7 +113,7 @@ namespace BookstoreApplication.Controllers
             return View(magazines);
         }
 
-        // POST: Magazine/Delete/5
+        // POST: Magazines/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

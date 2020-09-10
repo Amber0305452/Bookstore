@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BookstoreApplication.Models.Books>
+﻿@model IEnumerable<BookstoreApplication.Models.Magazines>
 
 @{
     ViewBag.Title = "Index";
@@ -15,7 +15,7 @@
             @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Author)
+            @Html.DisplayNameFor(model => model.Publishdate)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Languages)
@@ -24,16 +24,16 @@
             @Html.DisplayNameFor(model => model.Dimensions)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Weights)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Prints)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ISBN)
+            @Html.DisplayNameFor(model => model.ISSN)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Cover)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Authors.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Publishers.FullName)
         </th>
         <th></th>
     </tr>
@@ -44,7 +44,7 @@
             @Html.DisplayFor(modelItem => item.Title)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Author)
+            @Html.DisplayFor(modelItem => item.Publishdate)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Languages)
@@ -53,21 +53,21 @@
             @Html.DisplayFor(modelItem => item.Dimensions)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Weights)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Prints)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ISBN)
+            @Html.DisplayFor(modelItem => item.ISSN)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Cover)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Bookid }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Bookid }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Bookid })
+            @Html.DisplayFor(modelItem => item.Authors.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Publishers.FullName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Magazineid }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Magazineid }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Magazineid })
         </td>
     </tr>
 }

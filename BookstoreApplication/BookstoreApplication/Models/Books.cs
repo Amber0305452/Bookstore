@@ -16,13 +16,16 @@ namespace BookstoreApplication.Models
     {
         public int Bookid { get; set; }
         public string Title { get; set; }
-        public string Publisher { get; set; }
+        public Nullable<int> Authorid { get; set; }
+        public Nullable<int> Publisherid { get; set; }
         public string Languages { get; set; }
         public string Dimensions { get; set; }
         public Nullable<decimal> Weights { get; set; }
         public int Prints { get; set; }
-        public Nullable<int> ISBN { get; set; }
+        public int ISBN { get; set; }
         public byte[] Cover { get; set; }
-        public string Author { get; set; }
+    
+        public virtual Authors Authors { get; set; }
+        public virtual Publishers Publishers { get; set; }
     }
 }
