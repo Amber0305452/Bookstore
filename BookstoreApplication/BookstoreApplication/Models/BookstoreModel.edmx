@@ -4,40 +4,40 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="bookstoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="bookstoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Books">
           <Key>
             <PropertyRef Name="Bookid" />
           </Key>
-          <Property Name="Bookid" Type="int" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Author" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Languages" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Dimensions" Type="nvarchar" MaxLength="50" />
+          <Property Name="Bookid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="156" Nullable="false" />
+          <Property Name="Publisher" Type="nvarchar" MaxLength="156" Nullable="false" />
+          <Property Name="Languages" Type="nvarchar" MaxLength="156" />
+          <Property Name="Dimensions" Type="nvarchar" MaxLength="156" />
           <Property Name="Weights" Type="decimal" Precision="18" Scale="0" />
-          <Property Name="Prints" Type="int" />
-          <Property Name="ISBN" Type="int" Nullable="false" />
+          <Property Name="Prints" Type="int" Nullable="false" />
+          <Property Name="ISBN" Type="int" />
           <Property Name="Cover" Type="image" />
+          <Property Name="Author" Type="nvarchar" MaxLength="156" />
         </EntityType>
         <EntityType Name="Magazines">
           <Key>
             <PropertyRef Name="Magazineid" />
           </Key>
-          <Property Name="Magazineid" Type="int" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Author" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Publisher" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="PublishDate" Type="date" />
-          <Property Name="Dimensions" Type="nvarchar" MaxLength="50" />
-          <Property Name="ISSN" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Magazineid" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="156" Nullable="false" />
+          <Property Name="Publisher" Type="nvarchar" MaxLength="156" Nullable="false" />
+          <Property Name="Publishdate" Type="date" />
+          <Property Name="Languages" Type="nvarchar" MaxLength="156" />
+          <Property Name="Dimensions" Type="nvarchar" MaxLength="156" />
+          <Property Name="ISSN" Type="nvarchar" MaxLength="156" />
           <Property Name="Cover" Type="image" />
         </EntityType>
         <EntityContainer Name="bookstoreModelStoreContainer">
           <EntitySet Name="Books" EntityType="Self.Books" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Magazines" EntityType="Self.Magazines" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="bookstoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -45,27 +45,28 @@
           <Key>
             <PropertyRef Name="Bookid" />
           </Key>
-          <Property Name="Bookid" Type="Int32" Nullable="false" />
-          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Author" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Languages" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Dimensions" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Bookid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="156" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Publisher" Type="String" MaxLength="156" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Languages" Type="String" MaxLength="156" FixedLength="false" Unicode="true" />
+          <Property Name="Dimensions" Type="String" MaxLength="156" FixedLength="false" Unicode="true" />
           <Property Name="Weights" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="Prints" Type="Int32" />
-          <Property Name="ISBN" Type="Int32" Nullable="false" />
+          <Property Name="Prints" Type="Int32" Nullable="false" />
+          <Property Name="ISBN" Type="Int32" />
           <Property Name="Cover" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Author" Type="String" MaxLength="156" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Magazines">
           <Key>
             <PropertyRef Name="Magazineid" />
           </Key>
-          <Property Name="Magazineid" Type="Int32" Nullable="false" />
-          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Author" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Publisher" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="PublishDate" Type="DateTime" Precision="0" />
-          <Property Name="Dimensions" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="ISSN" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Magazineid" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="156" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Publisher" Type="String" MaxLength="156" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Publishdate" Type="DateTime" Precision="0" />
+          <Property Name="Languages" Type="String" MaxLength="156" FixedLength="false" Unicode="true" />
+          <Property Name="Dimensions" Type="String" MaxLength="156" FixedLength="false" Unicode="true" />
+          <Property Name="ISSN" Type="String" MaxLength="156" FixedLength="false" Unicode="true" />
           <Property Name="Cover" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityContainer Name="bookstoreEntities" annotation:LazyLoadingEnabled="true">
@@ -81,9 +82,10 @@
           <EntitySetMapping Name="Books">
             <EntityTypeMapping TypeName="bookstoreModel.Books">
               <MappingFragment StoreEntitySet="Books">
+                <ScalarProperty Name="Author" ColumnName="Author" />
                 <ScalarProperty Name="Bookid" ColumnName="Bookid" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="Publisher" ColumnName="Publisher" />
                 <ScalarProperty Name="Languages" ColumnName="Languages" />
                 <ScalarProperty Name="Dimensions" ColumnName="Dimensions" />
                 <ScalarProperty Name="Weights" ColumnName="Weights" />
@@ -98,9 +100,9 @@
               <MappingFragment StoreEntitySet="Magazines">
                 <ScalarProperty Name="Magazineid" ColumnName="Magazineid" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Author" ColumnName="Author" />
                 <ScalarProperty Name="Publisher" ColumnName="Publisher" />
-                <ScalarProperty Name="PublishDate" ColumnName="PublishDate" />
+                <ScalarProperty Name="Publishdate" ColumnName="Publishdate" />
+                <ScalarProperty Name="Languages" ColumnName="Languages" />
                 <ScalarProperty Name="Dimensions" ColumnName="Dimensions" />
                 <ScalarProperty Name="ISSN" ColumnName="ISSN" />
                 <ScalarProperty Name="Cover" ColumnName="Cover" />

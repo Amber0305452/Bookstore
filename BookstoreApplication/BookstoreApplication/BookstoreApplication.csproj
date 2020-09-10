@@ -179,26 +179,26 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Books.cs">
-      <DependentUpon>BooksModel.tt</DependentUpon>
+      <DependentUpon>BookstoreModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\BooksModel.Context.cs">
+    <Compile Include="Models\BookstoreModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BooksModel.Context.tt</DependentUpon>
+      <DependentUpon>BookstoreModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\BooksModel.cs">
+    <Compile Include="Models\BookstoreModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BooksModel.tt</DependentUpon>
+      <DependentUpon>BookstoreModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\BooksModel.Designer.cs">
+    <Compile Include="Models\BookstoreModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>BooksModel.edmx</DependentUpon>
+      <DependentUpon>BookstoreModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Magazines.cs">
-      <DependentUpon>BooksModel.tt</DependentUpon>
+      <DependentUpon>BookstoreModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -213,24 +213,24 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Models\BooksModel.Context.tt">
+    <Content Include="Models\BookstoreModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BooksModel.edmx</DependentUpon>
-      <LastGenOutput>BooksModel.Context.cs</LastGenOutput>
+      <DependentUpon>BookstoreModel.edmx</DependentUpon>
+      <LastGenOutput>BookstoreModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\BooksModel.tt">
+    <Content Include="Models\BookstoreModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>BooksModel.edmx</DependentUpon>
-      <LastGenOutput>BooksModel.cs</LastGenOutput>
+      <DependentUpon>BookstoreModel.edmx</DependentUpon>
+      <LastGenOutput>BookstoreModel.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <EntityDeploy Include="Models\BooksModel.edmx">
+    <EntityDeploy Include="Models\BookstoreModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>BooksModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>BookstoreModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\BooksModel.edmx.diagram">
-      <DependentUpon>BooksModel.edmx</DependentUpon>
+    <Content Include="Models\BookstoreModel.edmx.diagram">
+      <DependentUpon>BookstoreModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
