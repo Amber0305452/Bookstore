@@ -15,10 +15,22 @@ namespace BookstoreApplication.Controllers
         private bookstoreEntities db = new bookstoreEntities();
 
         // GET: Books
-        public ActionResult Index()
+        public ActionResult Index(string search, string option)
         {
             var books = db.Books.Include(b => b.Authors).Include(b => b.Publishers);
-            return View(books.ToList());
+            if (option == "Title")
+            {
+                return View(books.Where(m => m.Title.Contains(search) || search == null).ToList());
+            }
+            if (option == "ISBN")
+            {
+                return View(books.Where(m => m.ISBN.Equals(search) || search == null).ToList());
+            }
+            else
+            {
+                return View(books.ToList());
+            }
+       
         }
 
         // GET: Books/Details/5

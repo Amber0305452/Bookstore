@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="bookstoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="bookstoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Authors">
           <Key>
             <PropertyRef Name="Authorid" />
@@ -28,7 +28,7 @@
           <Property Name="Weights" Type="decimal" Precision="18" Scale="0" />
           <Property Name="Prints" Type="int" Nullable="false" />
           <Property Name="ISBN" Type="int" Nullable="false" />
-          <Property Name="Cover" Type="image" />
+          <Property Name="ImagePath" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Magazines">
           <Key>
@@ -42,7 +42,7 @@
           <Property Name="Languages" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Dimensions" Type="nvarchar" MaxLength="50" />
           <Property Name="ISSN" Type="nvarchar" MaxLength="156" Nullable="false" />
-          <Property Name="Cover" Type="image" />
+          <Property Name="ImagePath" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Publishers">
           <Key>
@@ -122,8 +122,7 @@
             <End Role="Magazines" EntitySet="Magazines" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="bookstoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -152,9 +151,9 @@
           <Property Name="Weights" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="Prints" Type="Int32" Nullable="false" />
           <Property Name="ISBN" Type="Int32" Nullable="false" />
-          <Property Name="Cover" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Authors" Relationship="Self.FK__Books__Authorid__66603565" FromRole="Books" ToRole="Authors" />
           <NavigationProperty Name="Publishers" Relationship="Self.FK__Books__Publisher__6754599E" FromRole="Books" ToRole="Publishers" />
+          <Property Name="ImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Magazines">
           <Key>
@@ -168,9 +167,9 @@
           <Property Name="Languages" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Dimensions" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ISSN" Type="String" MaxLength="156" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Cover" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Authors" Relationship="Self.FK__Magazines__Autho__6A30C649" FromRole="Magazines" ToRole="Authors" />
           <NavigationProperty Name="Publishers" Relationship="Self.FK__Magazines__Publi__6B24EA82" FromRole="Magazines" ToRole="Publishers" />
+          <Property Name="ImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Publishers">
           <Key>
@@ -272,6 +271,7 @@
           <EntitySetMapping Name="Books">
             <EntityTypeMapping TypeName="bookstoreModel.Books">
               <MappingFragment StoreEntitySet="Books">
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
                 <ScalarProperty Name="Bookid" ColumnName="Bookid" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Authorid" ColumnName="Authorid" />
@@ -281,13 +281,13 @@
                 <ScalarProperty Name="Weights" ColumnName="Weights" />
                 <ScalarProperty Name="Prints" ColumnName="Prints" />
                 <ScalarProperty Name="ISBN" ColumnName="ISBN" />
-                <ScalarProperty Name="Cover" ColumnName="Cover" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Magazines">
             <EntityTypeMapping TypeName="bookstoreModel.Magazines">
               <MappingFragment StoreEntitySet="Magazines">
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
                 <ScalarProperty Name="Magazineid" ColumnName="Magazineid" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Authorid" ColumnName="Authorid" />
@@ -296,7 +296,6 @@
                 <ScalarProperty Name="Languages" ColumnName="Languages" />
                 <ScalarProperty Name="Dimensions" ColumnName="Dimensions" />
                 <ScalarProperty Name="ISSN" ColumnName="ISSN" />
-                <ScalarProperty Name="Cover" ColumnName="Cover" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

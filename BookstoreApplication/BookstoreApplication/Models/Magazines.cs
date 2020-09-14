@@ -22,7 +22,7 @@ namespace BookstoreApplication.Models
         public string Languages { get; set; }
         public string Dimensions { get; set; }
         public string ISSN { get; set; }
-        public byte[] Cover { get; set; }
+        public string ImagePath { get; set; }
     
         public virtual Authors Authors { get; set; }
         public virtual Publishers Publishers { get; set; }

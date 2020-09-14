@@ -23,7 +23,7 @@ namespace BookstoreApplication.Models
         public Nullable<decimal> Weights { get; set; }
         public int Prints { get; set; }
         public int ISBN { get; set; }
-        public byte[] Cover { get; set; }
+        public string ImagePath { get; set; }
     
         public virtual Authors Authors { get; set; }
         public virtual Publishers Publishers { get; set; }

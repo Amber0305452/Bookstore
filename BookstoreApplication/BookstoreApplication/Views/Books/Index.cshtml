@@ -9,6 +9,11 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+@using (Html.BeginForm("Index", "Books", FormMethod.Get))
+{
+    <b>Search Option:</b>@Html.RadioButton("option","Title")<text>Title</text>@Html.RadioButton("option","ISBN")<text>ISBN</text>
+    @Html.TextBox("search")<input type="submit" name="submit" value="Search"/>
+}
 <table class="table">
     <tr>
         <th>
@@ -30,7 +35,7 @@
             @Html.DisplayNameFor(model => model.ISBN)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Cover)
+            @Html.DisplayNameFor(model => model.ImagePath)
         </th>
         <th>
             First name Author
@@ -62,7 +67,7 @@
             @Html.DisplayFor(modelItem => item.ISBN)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Cover)
+            @Html.DisplayFor(modelItem => item.ImagePath)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Authors.FirstName)
