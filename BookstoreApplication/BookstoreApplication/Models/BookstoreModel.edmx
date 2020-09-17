@@ -100,6 +100,8 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="sp_searchauthororpublisher" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_searchlanguage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="bookstoreModelStoreContainer">
           <EntitySet Name="Authors" EntityType="Self.Authors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Books" EntityType="Self.Books" Schema="dbo" store:Type="Tables" />
@@ -151,9 +153,9 @@
           <Property Name="Weights" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="Prints" Type="Int32" Nullable="false" />
           <Property Name="ISBN" Type="Int32" Nullable="false" />
+          <Property Name="ImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Authors" Relationship="Self.FK__Books__Authorid__66603565" FromRole="Books" ToRole="Authors" />
           <NavigationProperty Name="Publishers" Relationship="Self.FK__Books__Publisher__6754599E" FromRole="Books" ToRole="Publishers" />
-          <Property Name="ImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Magazines">
           <Key>
@@ -167,9 +169,9 @@
           <Property Name="Languages" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Dimensions" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="ISSN" Type="String" MaxLength="156" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Authors" Relationship="Self.FK__Magazines__Autho__6A30C649" FromRole="Magazines" ToRole="Authors" />
           <NavigationProperty Name="Publishers" Relationship="Self.FK__Magazines__Publi__6B24EA82" FromRole="Magazines" ToRole="Publishers" />
-          <Property Name="ImagePath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Publishers">
           <Key>
@@ -250,7 +252,22 @@
             <End Role="Publishers" EntitySet="Publishers" />
             <End Role="Magazines" EntitySet="Magazines" />
           </AssociationSet>
+          <FunctionImport Name="sp_searchauthororpublisher" />
+          <FunctionImport Name="sp_searchlanguage" ReturnType="Collection(bookstoreModel.sp_searchlanguage_Result)" />
+          <FunctionImport Name="sp_searchauthororpublisher1" ReturnType="Collection(bookstoreModel.sp_searchauthororpublisher1_Result)" />
         </EntityContainer>
+        <ComplexType Name="sp_searchlanguage_Result">
+          <Property Type="String" Name="Title_of_book" Nullable="false" MaxLength="156" />
+          <Property Type="String" Name="Title_of_Magazine" Nullable="false" MaxLength="156" />
+          <Property Type="String" Name="Language_book" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Language_Magazine" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_searchauthororpublisher1_Result">
+          <Property Type="String" Name="Title_of_Magazine" Nullable="false" MaxLength="156" />
+          <Property Type="String" Name="Title_of_Book" Nullable="false" MaxLength="156" />
+          <Property Type="String" Name="Name_of_Author" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Name_of_Publisher" Nullable="false" MaxLength="156" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -271,7 +288,6 @@
           <EntitySetMapping Name="Books">
             <EntityTypeMapping TypeName="bookstoreModel.Books">
               <MappingFragment StoreEntitySet="Books">
-                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
                 <ScalarProperty Name="Bookid" ColumnName="Bookid" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Authorid" ColumnName="Authorid" />
@@ -281,13 +297,13 @@
                 <ScalarProperty Name="Weights" ColumnName="Weights" />
                 <ScalarProperty Name="Prints" ColumnName="Prints" />
                 <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Magazines">
             <EntityTypeMapping TypeName="bookstoreModel.Magazines">
               <MappingFragment StoreEntitySet="Magazines">
-                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
                 <ScalarProperty Name="Magazineid" ColumnName="Magazineid" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Authorid" ColumnName="Authorid" />
@@ -296,6 +312,7 @@
                 <ScalarProperty Name="Languages" ColumnName="Languages" />
                 <ScalarProperty Name="Dimensions" ColumnName="Dimensions" />
                 <ScalarProperty Name="ISSN" ColumnName="ISSN" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -308,6 +325,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_searchlanguage" FunctionName="bookstoreModel.Store.sp_searchlanguage">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bookstoreModel.sp_searchlanguage_Result">
+                <ScalarProperty Name="Title_of_book" ColumnName="Title of book" />
+                <ScalarProperty Name="Title_of_Magazine" ColumnName="Title of Magazine" />
+                <ScalarProperty Name="Language_book" ColumnName="Language book" />
+                <ScalarProperty Name="Language_Magazine" ColumnName="Language Magazine" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_searchauthororpublisher1" FunctionName="bookstoreModel.Store.sp_searchauthororpublisher">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bookstoreModel.sp_searchauthororpublisher1_Result">
+                <ScalarProperty Name="Title_of_Magazine" ColumnName="Title of Magazine" />
+                <ScalarProperty Name="Title_of_Book" ColumnName="Title of Book" />
+                <ScalarProperty Name="Name_of_Author" ColumnName="Name of Author" />
+                <ScalarProperty Name="Name_of_Publisher" ColumnName="Name of Publisher" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

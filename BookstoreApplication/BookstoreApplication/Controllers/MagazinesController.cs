@@ -10,15 +10,27 @@ using BookstoreApplication.Models;
 
 namespace BookstoreApplication.Controllers
 {
+    [Authorize]
     public class MagazinesController : Controller
     {
         private bookstoreEntities db = new bookstoreEntities();
-
+        [AllowAnonymous]
         // GET: Magazines
-        public ActionResult Index()
+        public ActionResult Index(string option, string search)
         {
-            var magazines = db.Magazines.Include(m => m.Authors).Include(m => m.Publishers);
-            return View(magazines.ToList());
+            IQueryable<Magazines> magazines = db.Magazines.Include(m => m.Authors).Include(m => m.Publishers);
+            if (option == "Title")
+            {
+                return View(magazines.Where(m => m.Title.Contains(search) || search == null).ToList());
+            }
+            if (option == "ISSN")
+            {
+                return View(magazines.Where(m => m.ISSN.Contains(search) || search == null).ToList());
+            }
+            else
+            {
+                return View(magazines.ToList());
+            }
         }
 
         // GET: Magazines/Details/5

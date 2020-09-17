@@ -12,6 +12,8 @@ namespace BookstoreApplication.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class bookstoreEntities : DbContext
     {
@@ -29,5 +31,20 @@ namespace BookstoreApplication.Models
         public virtual DbSet<Books> Books { get; set; }
         public virtual DbSet<Magazines> Magazines { get; set; }
         public virtual DbSet<Publishers> Publishers { get; set; }
+    
+        public virtual int sp_searchauthororpublisher()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_searchauthororpublisher");
+        }
+    
+        public virtual ObjectResult<sp_searchlanguage_Result> sp_searchlanguage()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_searchlanguage_Result>("sp_searchlanguage");
+        }
+    
+        public virtual ObjectResult<sp_searchauthororpublisher1_Result> sp_searchauthororpublisher1()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_searchauthororpublisher1_Result>("sp_searchauthororpublisher1");
+        }
     }
 }

@@ -10,21 +10,24 @@ using BookstoreApplication.Models;
 
 namespace BookstoreApplication.Controllers
 {
+    [Authorize]
     public class BooksController : Controller
     {
         private bookstoreEntities db = new bookstoreEntities();
-
+        [AllowAnonymous]
         // GET: Books
         public ActionResult Index(string search, string option)
         {
-            var books = db.Books.Include(b => b.Authors).Include(b => b.Publishers);
+            IQueryable<Books> books = db.Books.Include(b => b.Authors).Include(b => b.Publishers);
             if (option == "Title")
             {
                 return View(books.Where(m => m.Title.Contains(search) || search == null).ToList());
             }
             if (option == "ISBN")
             {
-                return View(books.Where(m => m.ISBN.Equals(search) || search == null).ToList());
+                //Parse has to happen outside return cause otherwise no works
+                int searchISBN = int.Parse(search);
+                return View(books.Where(m => m.ISBN.Equals(searchISBN) || search == null).ToList());
             }
             else
             {
@@ -32,7 +35,7 @@ namespace BookstoreApplication.Controllers
             }
        
         }
-
+       
         // GET: Books/Details/5
         public ActionResult Details(int? id)
         {

@@ -1,0 +1,25 @@
+﻿@model List<BookstoreApplication.Models.sp_searchlanguage_Result>
+
+@using (Html.BeginForm("Index", "Languages", FormMethod.Get))
+{
+    <b>Search Option:</b>@Html.RadioButton("option", "LangMag")<text>Language of the Magazine</text>@Html.RadioButton("option", "LangBook")<text>Language of the book</text>
+    @Html.TextBox("search")<input type="submit" name="submit" value="Search" />
+}
+<table class="table">
+    <tr>
+        <th>Title of the book</th>
+        <th>Title of the magazine</th>
+        <th>Language of the book</th>
+        <th>Language of the magazine</th>
+    </tr>
+    <tr>
+        @foreach (var row in Model)
+        {
+            <td>@row.Title_of_book</td>
+            <td>@row.Title_of_Magazine</td>
+            <td>@row.Language_book</td>
+            <td>@row.Language_Magazine</td>
+        }
+    </tr>
+</table>
+

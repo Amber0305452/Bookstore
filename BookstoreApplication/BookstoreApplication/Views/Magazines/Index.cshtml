@@ -9,6 +9,11 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+@using (Html.BeginForm("Index", "Magazines", FormMethod.Get))
+{
+    <b>Search Option:</b>@Html.RadioButton("option", "Title")<text>Title</text>@Html.RadioButton("option", "ISSN")<text>ISSN</text>
+    @Html.TextBox("search")<input type="submit" name="submit" value="Search" />
+}
 <table class="table">
     <tr>
         <th>
@@ -38,38 +43,39 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Publishdate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Languages)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Dimensions)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ISSN)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ImagePath)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Authors.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Publishers.FullName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Magazineid }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Magazineid }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Magazineid })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Publishdate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Languages)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Dimensions)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ISSN)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ImagePath)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Authors.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Publishers.FullName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Magazineid }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Magazineid }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Magazineid })
+            </td>
+        </tr>
+    }
 
 </table>
