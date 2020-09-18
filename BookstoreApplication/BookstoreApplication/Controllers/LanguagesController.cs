@@ -13,14 +13,14 @@ namespace BookstoreApplication.Controllers
         public ActionResult Index(string search, string option)
         {
             bookstoreEntities db = new bookstoreEntities();
-            System.Data.Entity.Core.Objects.ObjectResult<sp_searchlanguage_Result> rows = db.sp_searchlanguage();
+            var rows = db.sp_searchlanguage();
             if (option == "LangMag")
             {
-                return View(rows.Where(m => m.Language_Magazine.Contains(search)));
+                return View(rows.Where(m => m.Language_Magazine.Contains(search)).ToList());
             }
             if (option == "LangBook")
             {
-                return View(rows.Where(m => m.Language_book.Contains(search)));
+                return View(rows.Where(m => m.Language_book.Contains(search)).ToList());
             }
             else
             {
